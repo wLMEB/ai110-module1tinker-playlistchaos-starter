@@ -196,18 +196,24 @@ def profile_sidebar():
 
     col1, col2 = st.sidebar.columns(2)
     with col1:
-        profile["hype_min_energy"] = st.sidebar.slider(
+        # Fixed: use st.slider (not st.sidebar.slider) so it renders inside the column
+        # Fixed: added key= so Streamlit tracks state across re-renders (prevents jump-back)
+        profile["hype_min_energy"] = st.slider(
             "Hype min energy",
             min_value=1,
             max_value=10,
             value=int(profile.get("hype_min_energy", 7)),
+            key="hype_min_energy",
         )
     with col2:
-        profile["chill_max_energy"] = st.sidebar.slider(
+        # Fixed: use st.slider (not st.sidebar.slider) so it renders inside the column
+        # Fixed: added key= so Streamlit tracks state across re-renders (prevents jump-back)
+        profile["chill_max_energy"] = st.slider(
             "Chill max energy",
             min_value=1,
             max_value=10,
             value=int(profile.get("chill_max_energy", 3)),
+            key="chill_max_energy",
         )
 
     profile["favorite_genre"] = st.sidebar.selectbox(
